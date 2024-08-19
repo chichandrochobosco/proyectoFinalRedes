@@ -6,25 +6,26 @@ import java.util.*;
 
 public class ServidorChat {
     private static final int PUERTO = 12345;
-    private static Set<PrintWriter> clientes = new HashSet<>();
+    private static Set<ClienteHandler> clientes = new HashSet<>();
 
     public static void main(String[] args) {
         System.out.println("Servidor de chat iniciado...");
         try (ServerSocket serverSocket = new ServerSocket(PUERTO)) {
             while (true) {
-                new ManejadorClientes(serverSocket.accept()).start();
+                new ClienteHandler(serverSocket.accept()).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static class ManejadorClientes extends Thread {
+    private static class ClienteHandler extends Thread {
         private Socket socket;
         private PrintWriter out;
         private BufferedReader in;
+        private String nombreUsuario;
 
-        public ManejadorClientes(Socket socket) {
+        public ClienteHandler(Socket socket) {
             this.socket = socket;
         }
 
@@ -33,16 +34,20 @@ public class ServidorChat {
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
 
+                // Leer el nombre del cliente
+                nombreUsuario = in.readLine();
+                System.out.println(nombreUsuario + " se ha unido al chat.");
+
                 synchronized (clientes) {
-                    clientes.add(out);
+                    clientes.add(this);
                 }
 
                 String input;
                 while ((input = in.readLine()) != null) {
-                    System.out.println("Mensaje recibido: " + input);
+                    System.out.println(nombreUsuario + ": " + input);
                     synchronized (clientes) {
-                        for (PrintWriter cliente : clientes) {
-                            cliente.println(input);
+                        for (ClienteHandler cliente : clientes) {
+                            cliente.out.println(nombreUsuario + ": " + input);
                         }
                     }
                 }
@@ -55,9 +60,11 @@ public class ServidorChat {
                     e.printStackTrace();
                 }
                 synchronized (clientes) {
-                    clientes.remove(out);
+                    clientes.remove(this);
                 }
+                System.out.println(nombreUsuario + " ha salido del chat.");
             }
         }
     }
 }
+
