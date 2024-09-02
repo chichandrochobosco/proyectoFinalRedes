@@ -12,6 +12,7 @@ public class Juego extends JFrame {
     private JLabel lblVidas1;
     private JLabel lblVidas2;
     private JLabel lblTurno;
+    private JLabel msj;
     private int vidasJugador1 = 3;
     private int vidasJugador2 = 3;
     private int balaPosicion;
@@ -31,7 +32,8 @@ public class Juego extends JFrame {
         lblVidas1 = new JLabel("Vidas Jugador 1: " + vidasJugador1);
         lblVidas2 = new JLabel("Vidas Jugador 2: " + vidasJugador2);
         lblTurno = new JLabel("Turno de Jugador 1");
-
+        msj = new JLabel("");
+        
         // Botones
         btnDisparar = new JButton("Disparar");
         btnSalir = new JButton("Salir al Menú");
@@ -40,8 +42,10 @@ public class Juego extends JFrame {
         panelJuego.add(lblVidas1);
         panelJuego.add(lblVidas2);
         panelJuego.add(lblTurno);
+        panelJuego.add(msj);
         panelJuego.add(btnDisparar);
         panelJuego.add(btnSalir);
+        
 
         // Agregar el panel al JFrame
         add(panelJuego);
@@ -68,22 +72,32 @@ public class Juego extends JFrame {
     }
 
     private void disparar() {
+        msj.setText("");
         Random random = new Random();
         int disparo = random.nextInt(8) + 1; // Generar número aleatorio entre 1 y 8
-        System.out.println("Disparo en posición: " + disparo + " (Bala en posición: " + balaPosicion + ")");
+        if(turnoJugador1){
+            System.out.println("jugador 1, Disparo en posición: " + disparo + " (Bala en posición: " + balaPosicion + ")");
+        }else{
+            System.out.println("jugador 2, Disparo en posición: " + disparo + " (Bala en posición: " + balaPosicion + ")");
+        }
+        
 
         // Verificar si el disparo coincide con la posición de la bala
         if (disparo == balaPosicion) {
             if (turnoJugador1) {
                 vidasJugador1--;
                 lblVidas1.setText("Vidas Jugador 1: " + vidasJugador1);
+                
             } else {
                 vidasJugador2--;
                 lblVidas2.setText("Vidas Jugador 2: " + vidasJugador2);
+                
             }
             // Reposicionar la bala aleatoriamente para el siguiente turno
+            msj.setText("Recargando tambor");
             balaPosicion = random.nextInt(8) + 1;
         }
+        
 
         // Cambiar turno
         turnoJugador1 = !turnoJugador1;
