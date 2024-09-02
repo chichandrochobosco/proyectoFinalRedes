@@ -12,7 +12,7 @@ public class Juego extends JFrame {
     private JLabel lblVidas1;
     private JLabel lblVidas2;
     private JLabel lblTurno;
-    private JLabel msj;
+    //private JLabel msj;
     private int vidasJugador1 = 3;
     private int vidasJugador2 = 3;
     private int balaPosicion;
@@ -32,7 +32,7 @@ public class Juego extends JFrame {
         lblVidas1 = new JLabel("Vidas Jugador 1: " + vidasJugador1);
         lblVidas2 = new JLabel("Vidas Jugador 2: " + vidasJugador2);
         lblTurno = new JLabel("Turno de Jugador 1");
-        msj = new JLabel("");
+        //msj = new JLabel("");
         
         // Botones
         btnDisparar = new JButton("Disparar");
@@ -42,7 +42,7 @@ public class Juego extends JFrame {
         panelJuego.add(lblVidas1);
         panelJuego.add(lblVidas2);
         panelJuego.add(lblTurno);
-        panelJuego.add(msj);
+        //panelJuego.add(msj);
         panelJuego.add(btnDisparar);
         panelJuego.add(btnSalir);
         
@@ -72,7 +72,7 @@ public class Juego extends JFrame {
     }
 
     private void disparar() {
-        msj.setText("");
+        //msj.setText("");
         Random random = new Random();
         int disparo = random.nextInt(8) + 1; // Generar número aleatorio entre 1 y 8
         if(turnoJugador1){
@@ -94,7 +94,8 @@ public class Juego extends JFrame {
                 
             }
             // Reposicionar la bala aleatoriamente para el siguiente turno
-            msj.setText("Recargando tambor");
+            JOptionPane.showMessageDialog(this, "DISPARO EN POSICION "+balaPosicion+", recargando tambor...");
+            //msj.setText("Recargando tambor");
             balaPosicion = random.nextInt(8) + 1;
         }
         
