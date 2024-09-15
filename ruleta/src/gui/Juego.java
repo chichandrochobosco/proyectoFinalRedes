@@ -1,4 +1,5 @@
 package gui;
+import gui.sounds.ReproductorSonido;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -83,6 +84,9 @@ public class Juego extends JFrame {
 
         // Verificar si el disparo coincide con la posición de la bala
         if (disparo == balaPosicion) {
+            ReproductorSonido reproductor = new ReproductorSonido();
+            reproductor.reproducirSonido("sounds/awp.wav"); 
+            
             if (turnoJugador1) {
                 vidasJugador1--;
                 lblVidas1.setText("Vidas Jugador 1: " + vidasJugador1);
