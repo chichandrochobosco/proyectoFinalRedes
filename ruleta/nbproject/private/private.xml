@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Licha/Desktop/proyectoFinalRedes/ruleta/src/gui/sounds/ReproductorSonido.java</file>
+            <file>file:/D:/Licha/Desktop/proyectoFinalRedes/ruleta/src/gui/Juego.java</file>
+            <file>file:/D:/Licha/Desktop/proyectoFinalRedes/ruleta/src/gui/RuletaRusa.java</file>
+            <file>file:/D:/Licha/Desktop/proyectoFinalRedes/ruleta/src/gui/ConfirmacionJugadores.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -44,9 +44,10 @@ public class ConfirmacionJugadores extends JFrame {
                 verificarListos();
             }
         });
+        
     }
 
-    private void verificarListos() {
+    public void verificarListos() {
         if (jugador1Listo && jugador2Listo) {
             // Si ambos jugadores están listos, iniciamos la partida
             Juego juego = new Juego();

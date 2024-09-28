@@ -73,6 +73,7 @@ public class Juego extends JFrame {
 
     private void disparar() {
         //msj.setText("");
+        ReproductorSonido reproductor = new ReproductorSonido();
         Random random = new Random();
         int disparo = random.nextInt(6) + 1; // Generar número aleatorio entre 1 y 6
         if(turnoJugador1){
@@ -80,11 +81,11 @@ public class Juego extends JFrame {
         }else{
             System.out.println("jugador 2, Disparo en posición: " + disparo + " (Bala en posición: " + balaPosicion + ")");
         }
-        
+        reproductor.reproducirSonido("sounds/girotambor.wav");
 
         // Verificar si el disparo coincide con la posición de la bala
         if (disparo == balaPosicion) {
-            ReproductorSonido reproductor = new ReproductorSonido();
+            
             reproductor.reproducirSonido("sounds/awp.wav"); 
             
             if (turnoJugador1) {
@@ -98,6 +99,7 @@ public class Juego extends JFrame {
             }
             // Reposicionar la bala aleatoriamente para el siguiente turno
             JOptionPane.showMessageDialog(this, "DISPARO EN POSICION "+balaPosicion+", recargando tambor...");
+            reproductor.reproducirSonido("sounds/recarga.wav");
             
             //JOptionPane.showConfirmDialog("recargar", )
             
